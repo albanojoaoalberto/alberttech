@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albert Tech | Financial Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --bg: #020617;
+            --accent: #f97316;
+            --accent-glow: rgba(249, 115, 22, 0.4);
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--bg); 
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Grade Dinâmica de Fundo */
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(249, 115, 22, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(249, 115, 22, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            perspective: 1000px;
+            z-index: -1;
+            transform: rotateX(60deg) translateY(-200px);
+            opacity: 0.3;
+        }
+
+        /* Navegação Blur */
+        nav {
+            padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(2, 6, 23, 0.7);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; }
+        .logo span { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
+
+        /* Hero com Animação */
+        .hero {
+            padding: 200px 8% 100px;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 { 
+            font-size: clamp(2.8rem, 8vw, 5rem); 
+            line-height: 1; font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #fff, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* Bento Cards Dinâmicos */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            padding: 0 8% 100px;
+        }
+
+        .bento-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 35px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column;
+            position: relative; overflow: hidden;
+        }
+
+        .bento-card:hover {
+            transform: scale(1.02) rotateX(2deg) rotateY(2deg);
+            border-color: var(--accent);
+            background: rgba(249, 115, 22, 0.03);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .redotpay { grid-column: span 7; }
+        .bybit { grid-column: span 5; }
+        .airtm { grid-column: span 5; }
+        .binance { grid-column: span 7; }
+
+        .icon-box {
+            width: 65px; height: 65px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(249,115,22,0.1));
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 30px; font-size: 1.8rem; color: var(--accent);
+            border: 1px solid var(--border-glass);
+        }
+
+        .btn-dynamic {
+            background: linear-gradient(45deg, var(--accent), #ff9d5c);
+            color: #fff; padding: 18px 30px; border-radius: 100px;
+            text-decoration: none; font-weight: 800;
+            display: inline-flex; align-items: center; gap: 12px;
+            width: fit-content; transition: 0.3s;
+            box-shadow: 0 10px 20px var(--accent-glow);
+            margin-top: auto;
+        }
+
+        .btn-dynamic:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px var(--accent-glow);
+            filter: brightness(1.1);
+        }
+
+        /* Bank Ticker */
+        .ticker {
+            background: rgba(255,255,255,0.02);
+            padding: 30px 0; border-y: 1px solid var(--border-glass);
+            overflow: hidden; white-space: nowrap;
+        }
+
+        .ticker-wrap { display: inline-block; animation: ticker 20s linear infinite; }
+        .ticker-wrap span { font-size: 1.2rem; font-weight: 800; color: var(--text-muted); margin: 0 50px; opacity: 0.5; }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @media (max-width: 900px) {
+            .redotpay, .bybit, .airtm, .binance { grid-column: span 12; }
+            .hero { padding: 150px 5% 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+
+    <nav>
+        <div class="logo">ALBERT<span>TECH</span></div>
+        <div style="font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; color: #4ade80;">
+            ● 24/7 ACTIVE
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div style="background: rgba(249,115,22,0.1); color: var(--accent); padding: 8px 20px; border-radius: 100px; display: inline-block; font-weight: 700; font-size: 0.8rem; margin-bottom: 20px;">
+            PLATAFORMA N.º 1 DE ATIVOS DIGITAIS
+        </div>
+        <h1>Inovação que <span>move o seu dinheiro.</span></h1>
+        <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 650px; margin: 0 auto;">
+            Simplificamos o acesso ao capital global. De Luanda para o mundo, com segurança e rapidez imbatível.
+        </p>
+    </header>
+
+    <section class="services-grid">
+        <div class="bento-card redotpay">
+            <div class="icon-box"><i class="ph-fill ph-credit-card"></i></div>
+            <h3>RedotPay Visa</h3>
+            <p>O cartão mais solicitado em Angola. Pague anúncios no Facebook, assinaturas e compras na Amazon sem bloqueios.</p>
+            <a href="javascript:void(0)" onclick="talk('RedotPay')" class="btn-dynamic">Ativar Cartão <i class="ph-bold ph-lightning"></i></a>
+        </div>
+
+        <div class="bento-card bybit">
+            <div class="icon-box"><i class="ph-fill ph-chart-line-up"></i></div>
+            <h3>Bybit Card</h3>
+            <p>Seus lucros em cripto disponíveis em um cartão físico. Use seu USDT em qualquer lugar.</p>
+            <a href="javascript:void(0)" onclick="talk('Bybit')" class="btn-dynamic">Consultar</a>
+        </div>
+
+        <div class="bento-card airtm">
+            <div class="icon-box"><i class="ph-fill ph-currency-dollar"></i></div>
+            <h3>Airtm Wallet</h3>
+            <p>A forma mais inteligente de poupar e transacionar em dólares digitais com as menores taxas.</p>
+            <a href="javascript:void(0)" onclick="talk('Airtm')" class="btn-dynamic">Câmbio Agora</a>
+        </div>
+
+        <div class="bento-card binance">
+            <div class="icon-box"><i class="ph-fill ph-shield-check"></i></div>
+            <h3>Binance Mentoria</h3>
+            <p>Não perca dinheiro por falta de conhecimento. Aprenda a dominar o P2P e proteja seu patrimônio com experts.</p>
+            <a href="javascript:void(0)" onclick="talk('Binance')" class="btn-dynamic">Falar com Mentor <i class="ph-bold ph-users-four"></i></a>
+        </div>
+    </section>
+
+    <div class="ticker">
+        <div class="ticker-wrap">
+            <span>MULTICAIXA EXPRESS</span> <span>BANCO BAI</span> <span>BANCO BFA</span> <span>BIC</span> <span>ATLÂNTICO</span> <span>BANCO SOL</span>
+            <span>MULTICAIXA EXPRESS</span> <span>BANCO BAI</span> <span>BANCO BFA</span> <span>BIC</span> <span>ATLÂNTICO</span> <span>BANCO SOL</span>
+        </div>
+    </div>
+
+    <footer style="padding: 80px 8%; text-align: center; border-top: 1px solid var(--border-glass);">
+        <h2 style="margin-bottom: 20px;">Albert Tech Solutions</h2>
+        <p style="color: var(--text-muted);">Especialistas em Infraestrutura Financeira Digital em Angola.</p>
+        <div style="margin-top: 40px; opacity: 0.3; font-size: 0.8rem;">© 2026 TODOS OS DIREITOS RESERVADOS.</div>
+    </footer>
+
+    <script>
+        function talk(service) {
+            const tel = "244946536698";
+            let txt = "";
+            if(service === 'RedotPay') txt = "🚀 Olá Albert! Quero ativar o meu cartão RedotPay agora.";
+            if(service === 'Bybit') txt = "💳 Olá! Tenho interesse no cartão físico da Bybit. Como proceder?";
+            if(service === 'Airtm') txt = "💵 Olá! Preciso de ajuda com câmbio Airtm (Kwanza para AirUSD).";
+            if(service === 'Binance') txt = "📈 Olá Albert! Quero aprender a usar o Binance P2P com segurança.";
+            
+            window.open(`https://wa.me/${tel}?text=${encodeURIComponent(txt)}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>
